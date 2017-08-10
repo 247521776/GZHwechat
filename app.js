@@ -25,7 +25,7 @@ const wechat = require("wechat");
 app.use(wechat(config.wechat, function(req, res, next) {
     const message = req.weixin;
     console.log(message, "----");
-    reply.findAll(message, (err, data) => {
+    reply.findAll(message.Content, (err, data) => {
         if (err) {
             return next(err);
         }
