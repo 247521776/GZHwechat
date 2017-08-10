@@ -5,9 +5,11 @@ const express = require("express");
 const config  = require("./config.json");
 const app     = express();
 const mongoose= require("mongoose");
-
-const db = mongoose.createConnection(config.mongodb);
 const controllers = require("./controllers");
+
+const db = mongoose.createConnection(config.mongodb, function(err) {
+    console.log(err);
+});
 
 db.on("error", (err) => {
     console.log(err);
