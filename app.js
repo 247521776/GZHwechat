@@ -5,9 +5,9 @@ const express = require("express");
 const config  = require("./config.json");
 const app     = express();
 const mongoose= require("mongoose");
-const controllers = require("./controllers");
 
 const db = mongoose.createConnection(config.mongodb);
+const controllers = require("./controllers");
 
 db.on("error", (err) => {
     console.log(err);
