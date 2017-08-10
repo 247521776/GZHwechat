@@ -12,8 +12,7 @@ const reply = new Schema({
 reply.statics.findAll = function(keywords, cb) {
     return this.find({keywords}, cb);
 };
-mongoose.model("reply", reply);
 
 module.exports = (db) => {
-    return db.model("reply");
+    return db.model("reply", reply);
 };
