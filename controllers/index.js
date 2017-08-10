@@ -24,4 +24,4 @@ router.all("/api/reply", wechat(config, (req, res, next) => {
     });
 }));
 
-return router;
+module.exports = router;
