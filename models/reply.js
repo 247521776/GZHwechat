@@ -9,8 +9,4 @@ const reply = new Schema({
     content: String
 });
 
-reply.statics.findAll = function(keywords, cb) {
-    return this.find({keywords}, cb);
-};
-
 module.exports = mongoose.model("news", reply);
