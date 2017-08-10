@@ -8,7 +8,6 @@ const mongoose= require("mongoose");
 const controllers = require("./controllers");
 
 app.use(express.query());
-require("./models/reply");
 app.use(controllers);
 
 const db = mongoose.connect(config.mongodb).connection;

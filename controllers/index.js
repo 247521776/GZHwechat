@@ -5,6 +5,7 @@ const router = require("express").Router();
 const config = require("../config.json").wechat;
 const wechat = require("wechat");
 const mongoose= require("mongoose");
+require("../models/reply");
 const reply  = mongoose.model("news");
 
 router.all("/api/reply", wechat(config, (req, res, next) => {
