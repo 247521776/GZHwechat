@@ -13,16 +13,16 @@ db.on("error", (err) => {
     console.log(err);
 });
 
-app.use((req, res, next) => {
-    console.log("coming");
-    next();
-})
+// app.use((req, res, next) => {
+//     console.log("coming");
+//     next();
+// })
 // app.use(express.query());
 const router = require("express").Router();
 const reply = require("./models/reply");
 const wechat = require("wechat");
 
-app.use("/", wechat(config.wechat, function(req, res, next) {
+app.use(wechat(config.wechat, function(req, res, next) {
     const message = req.weixin;
     console.log(message, "----");
     reply.findAll(message, (err, data) => {
