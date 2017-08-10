@@ -13,6 +13,4 @@ reply.statics.findAll = function(keywords, cb) {
     return this.find({keywords}, cb);
 };
 
-module.exports = (db) => {
-    return db.model("reply", reply);
-};
+module.exports = mongoose.model("news", reply);

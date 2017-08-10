@@ -17,7 +17,7 @@ db.on("error", (err) => {
 
 
 app.use(express.query());
-app.use(controllers(db));
+app.use(controllers);
 
 app.listen(2999);
 console.log("启动成功");
