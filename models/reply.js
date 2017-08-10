@@ -9,7 +9,7 @@ const reply = new Schema({
     content: String
 });
 
-reply.statics.findAll = (keywords, cb) => {
+reply.statics.findAll = function(keywords, cb) {
     return this.model("reply").find({keywords}, cb);
 };
 
