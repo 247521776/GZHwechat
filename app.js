@@ -21,7 +21,7 @@ const router = require("express").Router();
 const reply = require("./models/reply");
 const wechat = require("wechat");
 
-app.use("/api/reply", wechat(config.wechat, (req, res, next) => {
+app.use("/api/reply", wechat(config.wechat, function(req, res, next) {
     const message = req.weixin;
     console.log(message, "----");
     reply.findAll(message, (err, data) => {
