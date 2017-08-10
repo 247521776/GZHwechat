@@ -27,7 +27,7 @@ app.use(wechat(config.wechat, function(req, res, next) {
     console.log(message, "----");
     reply.findAll(message.Content, (err, data) => {
         if (err) {
-            return next(err);
+            return console.log(err);
         }
         res.reply(data[0].content);
     });
