@@ -13,11 +13,11 @@ db.on("error", (err) => {
     console.log(err);
 });
 
-// app.use((req, res, next) => {
-//     console.log("coming");
-//     next();
-// })
-// app.use(express.query());
+app.use((req, res, next) => {
+    console.log("coming");
+    next();
+});
+app.use(express.query());
 const router = require("express").Router();
 const reply = require("./models/reply");
 const wechat = require("wechat");
