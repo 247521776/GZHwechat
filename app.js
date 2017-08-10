@@ -13,8 +13,9 @@ db.on("error", (err) => {
     console.log(err);
 });
 
-app.use(() => {
+app.use((req, res, next) => {
     console.log("coming");
+    next();
 })
 // app.use(express.query());
 const router = require("express").Router();
