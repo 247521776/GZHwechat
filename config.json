@@ -1,8 +1,0 @@
-{
-  "wechat": {
-    "token": "123456",
-    "appid": "wx07c4d7651d013d1a",
-    "appsecret": "872d182867f49d50bd47ecbd62604347"
-  },
-  "mongodb": "mongodb://yanglei:wo247521776@123.206.6.87:27017/myDb"
-}
