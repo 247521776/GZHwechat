@@ -4,7 +4,8 @@
 const router = require("express").Router();
 const config = require("../config.json").wechat;
 const wechat = require("wechat");
-const reply  = require("../models/reply");
+const mongoose= require("mongoose");
+const reply  = mongoose.model("news");
 
 router.all("/api/reply", wechat(config, (req, res, next) => {
     const message = req.weixin;

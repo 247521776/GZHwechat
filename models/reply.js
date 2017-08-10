@@ -8,4 +8,4 @@ const reply = new Schema({
     content: String
 });
 
-module.exports = mongoose.model("news", reply);
+mongoose.model("news", reply);
