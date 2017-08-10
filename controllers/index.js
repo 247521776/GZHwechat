@@ -5,12 +5,12 @@ const router = require("express").Router();
 const config = require("../config.json").wechat;
 const wechat = require("wechat");
 const mongoose= require("mongoose");
-
+const reply  = mongoose.model("news");
 
 router.all("/api/reply", wechat(config, (req, res, next) => {
     const message = req.weixin;
     console.log(message, "----");
-    const reply  = mongoose.model("news");
+    console.log(reply);
     reply.find({
         keywords: message.Content
     }, function(err, data) {
