@@ -11,9 +11,7 @@ app.use(express.query());
 require("./models/reply");
 app.use(controllers);
 
-const db = mongoose.createConnection(config.mongodb, function(err) {
-    console.log(err);
-});
+const db = mongoose.connect(config.mongodb).connection;
 
 db.on("error", function(err) {
     console.log(err);
