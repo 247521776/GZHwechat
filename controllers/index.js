@@ -15,7 +15,11 @@ module.exports = (db) => {
             if (err) {
                 return next(err);
             }
-            res.reply(data[0].content);
+            let content = "这个问题我无法回答";
+            if (data.length > 0) {
+                content = data[0].content;
+            }
+            res.reply(content);
         });
     }));
 
