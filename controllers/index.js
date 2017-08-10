@@ -9,6 +9,7 @@ const reply  = require("../models/reply");
 router.all("/api/reply", wechat(config, (req, res, next) => {
     const message = req.weixin;
     console.log(message, "----");
+    console.log(reply);
     reply.find({
         keywords: message.Content
     }, function(err, data) {
