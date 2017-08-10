@@ -9,7 +9,7 @@ module.exports = (db) => {
     router.all("/api/reply", wechat(config, (req, res, next) => {
         const message = req.weixin;
         console.log(message, "----");
-        const reply = db.model("reply");
+        const reply = require("../models/reply")(db);
         reply.find({
             keywords: message.Content
         }, function(err, data) {

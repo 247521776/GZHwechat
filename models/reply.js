@@ -13,3 +13,7 @@ reply.statics.findAll = function(keywords, cb) {
     return this.find({keywords}, cb);
 };
 mongoose.model("reply", reply);
+
+module.exports = (db) => {
+    return db.model("reply");
+};
