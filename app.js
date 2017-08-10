@@ -15,10 +15,11 @@ const db = mongoose.createConnection(config.mongodb, function(err) {
     console.log(err);
 });
 
-db.on("error", (err) => {
+db.on("error", function(err) {
     console.log(err);
 });
 
-
-app.listen(2999);
-console.log("启动成功");
+db.once("open", function() {
+    app.listen(2999);
+    console.log("启动成功");
+});
