@@ -18,4 +18,6 @@ module.exports = (db) => {
             res.reply(data[0].content);
         });
     }));
+
+    return router;
 };
