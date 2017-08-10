@@ -9,7 +9,8 @@ const wechat = require("wechat");
 router.get("/api/reply", wechat(config, (req, res, next) => {
     const message = req.weixin;
     console.log(message, "----");
-    reply.findAll(message, (err, data) => {
+    reply.findAll(message.Content, function(err, data) {
+        console.log(err, data);
         if (err) {
             return next(err);
         }

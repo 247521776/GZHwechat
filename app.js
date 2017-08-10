@@ -13,25 +13,8 @@ db.on("error", (err) => {
     console.log(err);
 });
 
-app.use((req, res, next) => {
-    console.log("coming");
-    next();
-});
-app.use(express.query());
-const router = require("express").Router();
-const reply = require("./models/reply");
-const wechat = require("wechat");
 
-app.use(wechat(config.wechat, function(req, res, next) {
-    const message = req.weixin;
-    console.log(message, "----");
-    reply.findAll(message.Content, (err, data) => {
-        if (err) {
-            return console.log(err);
-        }
-        res.reply(data[0].content);
-    });
-}));
+app.use(express.query());
 app.use(router);
 
 app.listen(2999);
