@@ -11,19 +11,18 @@ const join        = require("path").join;
 const models      = join(__dirname, "./models");
 
 app.use(express.query());
-app.use(controllers);
-
+//挂在所有集合
 fs.readdirSync(models)
     .filter(file => ~file.search(/^[^\.].*\.js$/))
     .forEach(file => require(join(models, file)));
+//添加所有路由
+app.use(controllers);
 
-const db = mongoose.connect(config.mongodb).connection;
-
-db.on("error", function(err) {
+//连接数据并启动项目
+mongoose.connect(config.mongodb).connection
+    .on("error", function(err) {
     console.log(err);
-});
-
-db.once("open", function() {
+}).once("open", function() {
     app.listen(2999);
     console.log("启动成功");
 });

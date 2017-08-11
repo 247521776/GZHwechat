@@ -9,11 +9,13 @@ const controllers = __dirname;
 fs.readdirSync(controllers)
     .filter(controllerPath => ~controllerPath.search(/^[^\.].*\.js$/))
     .forEach((controllerPath) => {
-        const controller = require(join(__dirname, controllerPath));
-        for (let url in controller) {
-            const methods = controller[url];
-            for (let method in methods) {
-                router[method](url, methods[method]);
+        if (controllerPath !== "index.js") {
+            const controller = require(join(__dirname, controllerPath));
+            for (let url in controller) {
+                const methods = controller[url];
+                for (let method in methods) {
+                    router[method](url, methods[method]);
+                }
             }
         }
     });
