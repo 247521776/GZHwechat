@@ -8,4 +8,5 @@ const reply = new Schema({
     keywords: String,
     content: String
 });
+
 mongoose.model("news", reply);
