@@ -1,9 +1,9 @@
 /**
  * Created by boom on 2017/8/9.
  */
-const router = require("express").Router();
-const fs = require("fs");
-const join = require("path").join;
+const router      = require("express").Router();
+const fs          = require("fs");
+const join        = require("path").join;
 const controllers = __dirname;
 
 fs.readdirSync(controllers)
@@ -20,4 +20,6 @@ fs.readdirSync(controllers)
         }
     });
 
-module.exports = router;
+module.exports = (app) => {
+    app.use(router);
+};
