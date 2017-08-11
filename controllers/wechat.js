@@ -13,7 +13,6 @@ module.exports = {
             reply.find({
                 keywords: message.Content
             }, function(err, data) {
-                console.log(err, data);
                 if (err) {
                     return next(err);
                 }

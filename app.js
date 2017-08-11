@@ -8,7 +8,6 @@ const mongoose    = require("mongoose");
 const fs          = require("fs");
 const join        = require("path").join;
 const models      = join(__dirname, "./models");
-console.log(models);
 
 //挂在所有集合
 fs.readdirSync(models)
@@ -19,10 +18,10 @@ app.use(express.query());
 require("./controllers")(app);
 
 //连接数据并启动项目
-// mongoose.connect(config.mongodb).connection
-//     .on("error", function(err) {
-//     console.log(err);
-// }).once("open", function() {
-//     app.listen(2999);
-//     console.log("启动成功");
-// });
+mongoose.connect(config.mongodb).connection
+    .on("error", function(err) {
+    console.log(err);
+}).once("open", function() {
+    app.listen(2999);
+    console.log("启动成功");
+});
