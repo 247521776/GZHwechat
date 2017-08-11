@@ -9,5 +9,4 @@ const reply = new Schema({
     content: String
 });
 
-
 mongoose.model("news", reply);
