@@ -2,27 +2,20 @@
  * Created by boom on 2017/8/9.
  */
 const router = require("express").Router();
-const config = require("../config.json").wechat;
-const wechat = require("wechat");
-const mongoose= require("mongoose");
-require("../models/reply");
-const reply  = mongoose.model("news");
+const fs = require("fs");
+const join = require("path").join;
+const controllers = __dirname;
 
-router.all("/api/reply", wechat(config, (req, res, next) => {
-    const message = req.weixin;
-    reply.find({
-        keywords: message.Content
-    }, function(err, data) {
-        console.log(err, data);
-        if (err) {
-            return next(err);
+fs.readdirSync(controllers)
+    .filter(controllerPath => ~controllerPath.search(/^[^\.].*\.js$/))
+    .forEach((controllerPath) => {
+        const controller = require(join(__dirname, controllerPath));
+        for (let url in controller) {
+            const methods = controller[url];
+            for (let method in methods) {
+                router[method](url, methods[method]);
+            }
         }
-        let content = "这个问题我无法回答";
-        if (data.length > 0) {
-            content = data[0].content;
-        }
-        res.reply(content);
     });
-}));
 
 module.exports = router;
