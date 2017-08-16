@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,14 @@
   },
   "homepage": "https://github.com/247521776/wechatGZH#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "md5": "^2.2.1",
     "mongoose": "^4.7.0",
     "wechat": "^2.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0",
+    "supertest": "^3.0.0"
   }
 }

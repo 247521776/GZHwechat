@@ -8,12 +8,16 @@ const mongoose    = require("mongoose");
 const fs          = require("fs");
 const join        = require("path").join;
 const models      = join(__dirname, "./models");
+const bodyParser   = require("body-parser");
 
 //挂在所有集合
 fs.readdirSync(models)
     .filter(file => ~file.search(/^[^\.].*\.js$/))
     .forEach(file => require(join(models, file)));
 app.use(express.query());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 //添加所有路由
 require("./controllers")(app);
 
