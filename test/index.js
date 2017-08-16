@@ -60,9 +60,9 @@ describe("controller reply", function() {
             content: "thisPut"
         };
         request(app)
-            .post(`/api/reply/${id}`)
+            .put(`/api/reply/${id}`)
             .set('Content-Type', 'application/x-www-form-urlencoded')
-            .set('X-HTTP-Method-Override', 'POST')
+            .set('X-HTTP-Method-Override', 'PUT')
             .send(put)
             .end((err, res) => {
                 if (err) done(err);
@@ -73,7 +73,7 @@ describe("controller reply", function() {
 
     it("DELETE /api/reply/:id", (done) => {
         request(app)
-            .get(`/api/reply/${id}`)
+            .del(`/api/reply/${id}`)
             .expect(200)
             .end((err, res) => {
                 if (err) done(err);
@@ -84,7 +84,7 @@ describe("controller reply", function() {
 
     it("DELETE /api/reply/:keywords", (done) => {
         request(app)
-            .get("/api/reply/thisPut")
+            .del("/api/reply/thisPut")
             .expect(200)
             .end((err, res) => {
                 if (err) done(err);

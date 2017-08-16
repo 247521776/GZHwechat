@@ -39,7 +39,7 @@ module.exports = {
         }
     },
     "/api/reply/:keywords": {
-        get(req, res, next) {
+        delete(req, res, next) {
             const keywords = req.params.keywords;
             reply.remove({
                 keywords
@@ -70,7 +70,7 @@ module.exports = {
                 });
             })
         },
-        get(req, res, next) {
+        delete(req, res, next) {
             const id = req.params.id;
             reply.remove({
                 _id: id
