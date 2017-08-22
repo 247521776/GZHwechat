@@ -14,7 +14,7 @@ const users       = mongoose.model("users");
 const md5         = require("md5");
 
 module.exports = (app) => {
-    router.all("api/reply", wechat(config, (req, res, next) => {
+    router.all("/api/reply", wechat(config, (req, res, next) => {
         const message = req.weixin;
         reply.find({
             keywords: message.Content
