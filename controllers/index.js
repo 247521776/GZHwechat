@@ -13,20 +13,6 @@ const jwt         = require("jsonwebtoken");
 const users       = mongoose.model("users");
 const md5         = require("md5");
 
-fs.readdirSync(controllers)
-    .filter(controllerPath => ~controllerPath.search(/^[^\.].*\.js$/))
-    .forEach((controllerPath) => {
-        if (controllerPath !== "index.js") {
-            const controller = require(join(__dirname, controllerPath));
-            for (let url in controller) {
-                const methods = controller[url];
-                for (let method in methods) {
-                    router[method](url, methods[method]);
-                }
-            }
-        }
-    });
-
 module.exports = (app) => {
     router.all("api/reply", wechat(config, (req, res, next) => {
         const message = req.weixin;
@@ -51,7 +37,7 @@ module.exports = (app) => {
         users.find({
             username,
             password: md5(password)
-        }, function(err, data) => {
+        }, function(err, data) {
             if (err) {
                 next(err);
             }
@@ -79,27 +65,40 @@ module.exports = (app) => {
         });
     });
 
-    app.all("*", (req, res, next) => {
-        const token = req.query.token;
-        if (token) {
-            res.json({
-                code: 401,
-                msg: "请登录"
-            });
-        }
-        else {
-            jwt.verify(token, "woshiyang", (err, data) => {
-                if (err) {
-                    res.json({
-                        code: 401,
-                        msg: "请登录"
-                    });
+    // app.all("*", (req, res, next) => {
+    //     const token = req.query.token;
+    //     if (token) {
+    //         res.json({
+    //             code: 401,
+    //             msg: "请登录"
+    //         });
+    //     }
+    //     else {
+    //         jwt.verify(token, "woshiyang", (err, data) => {
+    //             if (err) {
+    //                 res.json({
+    //                     code: 401,
+    //                     msg: "请登录"
+    //                 });
+    //             }
+    //             else {
+    //                 next();
+    //             }
+    //         });
+    //     }
+    // });
+    fs.readdirSync(controllers)
+        .filter(controllerPath => ~controllerPath.search(/^[^\.].*\.js$/))
+        .forEach((controllerPath) => {
+            if (controllerPath !== "index.js") {
+                const controller = require(join(__dirname, controllerPath));
+                for (let url in controller) {
+                    const methods = controller[url];
+                    for (let method in methods) {
+                        router[method](url, methods[method]);
+                    }
                 }
-                else {
-                    next();
-                }
-            });
-        }
-    });
+            }
+        });
     app.use(router);
 };

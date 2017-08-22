@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const reply = mongoose.model("news");
 
 module.exports = {
-    "/api/reply": {
+    "/api/replyList": {
         get(req, res, next) {
             reply.find({}, function(err, data) {
                 if (err) {

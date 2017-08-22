@@ -8,7 +8,10 @@ const mongoose    = require("mongoose");
 const fs          = require("fs");
 const join        = require("path").join;
 const models      = join(__dirname, "./models");
-const bodyParser   = require("body-parser");
+const bodyParser  = require("body-parser");
+const cors        = require("cors");
+
+app.use(cors());
 
 //挂在所有集合
 fs.readdirSync(models)
@@ -18,14 +21,14 @@ app.use(express.query());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-//添加所有路由
-require("./controllers")(app);
 
 //连接数据并启动项目
 mongoose.connect(config.mongodb).connection
     .on("error", function(err) {
     console.log(err);
 }).once("open", function() {
+    //添加所有路由
+    require("./controllers")(app);
     app.listen(2999);
     console.log("启动成功");
 });

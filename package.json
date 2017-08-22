@@ -21,7 +21,9 @@
   "homepage": "https://github.com/247521776/wechatGZH#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
     "md5": "^2.2.1",
     "mongoose": "^4.7.0",
     "wechat": "^2.1.0"
