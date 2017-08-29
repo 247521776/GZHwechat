@@ -10,6 +10,7 @@ const join        = require("path").join;
 const models      = join(__dirname, "./models");
 const bodyParser  = require("body-parser");
 const cors        = require("cors");
+mongoose.Promise = global.Promise;
 
 app.use(cors());
 

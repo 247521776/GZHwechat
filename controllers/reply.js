@@ -38,23 +38,16 @@ module.exports = {
             })
         }
     },
-    "/api/reply/:keywords": {
-        delete(req, res, next) {
-            const keywords = req.params.keywords;
-            reply.remove({
-                keywords
-            }, (err) => {
-                if (err) next(err);
-                res.json({
-                    code: 200
-                });
-            });
-        }
-    },
     "/api/reply/:id": {
         put(req, res, next) {
             const body = req.body;
             const id = req.params.id;
+            if (!body.keywords || !body.content) {
+                return res.json({
+                    code: 403,
+                    data: "关键字或者内容不能为空"
+                })
+            }
             reply.update({
                 _id: id
             }, {

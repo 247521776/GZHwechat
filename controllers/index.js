@@ -48,7 +48,7 @@ module.exports = (app) => {
                 }, "woshiyang", {
                     expiresIn: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60  // 24小时过期
                 });
-                res.json({
+                return res.json({
                     code: 200,
                     token: token,
                     user: {
@@ -57,7 +57,7 @@ module.exports = (app) => {
                 });
             }
             else {
-                res.json({
+                return res.json({
                     code: 401,
                     msg: "请输入正确的账号/密码"
                 });
@@ -65,28 +65,29 @@ module.exports = (app) => {
         });
     });
 
-    // app.all("*", (req, res, next) => {
-    //     const token = req.query.token;
-    //     if (token) {
-    //         res.json({
-    //             code: 401,
-    //             msg: "请登录"
-    //         });
-    //     }
-    //     else {
-    //         jwt.verify(token, "woshiyang", (err, data) => {
-    //             if (err) {
-    //                 res.json({
-    //                     code: 401,
-    //                     msg: "请登录"
-    //                 });
-    //             }
-    //             else {
-    //                 next();
-    //             }
-    //         });
-    //     }
-    // });
+    router.all("/*", (req, res, next) => {
+        const token = req.query.token;
+        if (!token) {
+            res.json({
+                code: 401,
+                msg: "请登录"
+            });
+        }
+        else {
+            jwt.verify(token, "woshiyang", (err, data) => {
+                if (err) {
+                    res.json({
+                        code: 401,
+                        msg: "请登录"
+                    });
+                }
+                else {
+                    next();
+                }
+            });
+        }
+    });
+
     fs.readdirSync(controllers)
         .filter(controllerPath => ~controllerPath.search(/^[^\.].*\.js$/))
         .forEach((controllerPath) => {
