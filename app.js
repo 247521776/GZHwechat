@@ -11,6 +11,7 @@ const models      = join(__dirname, "./models");
 const bodyParser  = require("body-parser");
 const cors        = require("cors");
 mongoose.Promise = global.Promise;
+console.log("====");
 
 app.use(cors());
 
